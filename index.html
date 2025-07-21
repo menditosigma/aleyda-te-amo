@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Aleyda ❤️</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: block;
+    }
+    .mensaje {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      color: #ff4da6;
+      font-size: 3rem;
+      font-family: 'Segoe UI', sans-serif;
+      text-shadow: 0 0 10px #ff4da6;
+    }
+  </style>
+</head>
+<body>
+  <div class="mensaje">Aleyda ❤️</div>
+  <canvas id="canvas"></canvas>
+  <audio autoplay loop>
+    <source src="https://files.catbox.moe/mus5ui.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    let teAmo = "TE AMO ".split("");
+    let fontSize = 20;
+    let columns = canvas.width / fontSize;
+    let drops = [];
+
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ff4da6";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        let text = teAmo[Math.floor(Math.random() * teAmo.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
